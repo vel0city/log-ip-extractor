@@ -13,7 +13,6 @@ def get_ip_addrs(file):
     sys.stdout.write("{} line file read, analyzing".format(len(lines)))
     sys.stdout.flush()
     for line in lines:
-        sys.stdout.write(".")
         match = IP_REGEX.findall(line)
         if len(match) > 0 and match[0] not in ip_addrs.keys():
             try:
@@ -21,6 +20,8 @@ def get_ip_addrs(file):
             except socket.herror:
                 host = ['UNKNOWN']
             ip_addrs[match[0]] = [host[0], get_country(match[0])]
+            sys.stdout.write(".")
+            sys.stdout.flush()
     return ip_addrs
 
 
